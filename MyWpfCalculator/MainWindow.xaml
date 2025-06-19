@@ -7,7 +7,71 @@
         mc:Ignorable="d"
         Title="Calculator" Height="450" Width="335">
 
+    
+    <Window.Resources>
+        <Style x:Key="CalculatorButton" TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                                Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="25">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF999999"/>
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF999999"/>
+            <Setter Property="BorderThickness" Value="1"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightPink"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <Style x:Key="OperatorButton" TargetType="Button" BasedOn="{StaticResource CalculatorButton}">
+            <Setter Property="Background" Value="#FFFFA500"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter  Property="Background" Value="OrangeRed"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="EqualsButton" TargetType="Button" BasedOn="{StaticResource CalculatorButton}">
+            <Setter Property="Background" Value="#FF008000"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter  Property="Background" Value="LightGreen"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin="10">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -33,29 +97,29 @@
           Margin="1,10,10,10">
         </TextBox>
 
-        <Button Content="AC" Grid.Row="1" Grid.Column="0" Margin="5,5,5,5" FontSize="24" Click="AllClearButton_Click"/>
-        <Button Content="+/-" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5" FontSize="24" Click="ToggleSignButton_Click"/>
-        <Button Content="%" Grid.Row="1" Grid.Column="2" Margin="5,5,5,5" FontSize="24" Click="PercentageButton_Clic"/>
-        <Button Content="/" Grid.Row="1" Grid.Column="3" Margin="5,5,5,5" FontSize="24" Click="OperatorButton_Click"/>
+        <Button Content="AC" Grid.Row="1" Grid.Column="0" Style="{StaticResource CalculatorButton}" Click="AllClearButton_Click"/>
+        <Button Content="+/-" Grid.Row="1" Grid.Column="1" Style="{StaticResource CalculatorButton}" Click="ToggleSignButton_Click"/>
+        <Button Content="%" Grid.Row="1" Grid.Column="2" Style="{StaticResource CalculatorButton}" Click="PercentageButton_Clic"/>
+        <Button Content="/" Grid.Row="1" Grid.Column="3" Style="{StaticResource OperatorButton}" Click="OperatorButton_Click"/>
 
-        <Button Content="7" Grid.Row="2" Grid.Column="0" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="8" Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="9" Grid.Row="2" Grid.Column="2" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="*" Grid.Row="2" Grid.Column="3" Margin="5,5,5,5" FontSize="24" Click="OperatorButton_Click"/>
+        <Button Content="7" Grid.Row="2" Grid.Column="0" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="8" Grid.Row="2" Grid.Column="1" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="9" Grid.Row="2" Grid.Column="2" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="*" Grid.Row="2" Grid.Column="3" Style="{StaticResource OperatorButton}" Click="OperatorButton_Click"/>
 
-        <Button Content="4" Grid.Row="3" Grid.Column="0" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="5" Grid.Row="3" Grid.Column="1" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="6" Grid.Row="3" Grid.Column="2" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="-" Grid.Row="3" Grid.Column="3" Margin="5,5,5,5" FontSize="24" Click="OperatorButton_Click"/>
+        <Button Content="4" Grid.Row="3" Grid.Column="0" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="5" Grid.Row="3" Grid.Column="1" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="6" Grid.Row="3" Grid.Column="2" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="-" Grid.Row="3" Grid.Column="3" Style="{StaticResource OperatorButton}" Click="OperatorButton_Click"/>
 
-        <Button Content="1" Grid.Row="4" Grid.Column="0" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="2" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="3" Grid.Row="4" Grid.Column="2" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="+" Grid.Row="4" Grid.Column="3" Margin="5,5,5,5" FontSize="24" Click="OperatorButton_Click"/>
+        <Button Content="1" Grid.Row="4" Grid.Column="0" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="2" Grid.Row="4" Grid.Column="1" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="3" Grid.Row="4" Grid.Column="2" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="+" Grid.Row="4" Grid.Column="3" Style="{StaticResource OperatorButton}" Click="OperatorButton_Click"/>
 
-        <Button Content="0" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click" />
-        <Button Content="." Grid.Row="5" Grid.Column="2" Margin="5,5,5,5" FontSize="24" Click="NumberButton_Click"/>
-        <Button Content="=" Grid.Row="5" Grid.Column="3" Margin="5,5,5,5" FontSize="24" Click="EqualsButton_Click"/>
+        <Button Content="0" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click" />
+        <Button Content="." Grid.Row="5" Grid.Column="2" Style="{StaticResource CalculatorButton}" Click="NumberButton_Click"/>
+        <Button Content="=" Grid.Row="5" Grid.Column="3" Style="{StaticResource EqualsButton}" Click="EqualsButton_Click"/>
 
     </Grid>
 </Window>
